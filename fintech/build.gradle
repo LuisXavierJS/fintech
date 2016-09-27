@@ -1,0 +1,72 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven {
+      		url "https://plugins.gradle.org/m2/"
+    	}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	        classpath ('ro.isdc.wro4j.gradle:wro4j-gradle-plugin:1.8.0.Beta4')
+	         classpath ('com.moowork.gradle:gradle-node-plugin:0.13')
+	        
+	}
+}
+
+group = 'ro.isdc.wro4j.gradle'
+version = '1.8.0'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'wro4j'
+apply plugin: 'com.moowork.node'
+
+
+jar {
+	baseName = 'fintech'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	compile('org.webjars:jquery:3.1.1')
+	compile('org.webjars:bootstrap:3.3.7-1')
+}
+
+webResources {
+    bundle ('core') {
+        js 'js/**/*.js'
+        preProcessor 'jsMin'
+    }
+
+    bundle ('libs') {
+        js 'webjars/jquery/3.1.1/jquery.min.js'
+    }
+
+    bundle ('theme-default') {
+        css 'webjars/bootstrap/3.3.7-1/less/bootstrap.less'
+        css 'tema/padrao/main.css'
+
+        cssOverrideImport 'variables.less', '../../../../themes/default/variables.less'
+        preProcessor 'less4j', 'cssUrlRewriting'
+    }
+
+    assets {
+        include 'tema/padrao/img/**'
+    }
+}

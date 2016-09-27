@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<title>PSW FINTECH</title>
+		<meta charset="utf-8">
+		<!--link href="css/angular-bootstrap.css" rel="stylesheet"-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+	</head>
+<body ng-app="hello">
+<div ng-controller="navigation" class="container">
+		<ul class="nav nav-pills" role="tablist">
+			<li class="active"><a href="#/">home</a></li>
+			<li><a href="#/login">login</a></li>
+			<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>
+		</ul>
+	</div>
+	<div ng-view class="container"></div>
+  <script src="js/hello.js"></script>
+</body>
+</html>
